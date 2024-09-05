@@ -1,0 +1,110 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Auth</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="auth.user$ | async; then authenticated else guest">
+      <!-- template will replace this div -->
+  </div>
+
+  <!-- User NOT logged in -->
+  <ng-template #guest>
+    <div class="backdrop">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size-md="8" offset-md="2" size="12" class="ion-text-center">
+            <img class="ion-padding" src="https://firebasestorage.googleapis.com/v0/b/stellar-network-713a6.appspot.com/o/Screenshot%20from%202024-09-05%2020-04-53.png?alt=media&token=69cdf4bd-134b-43e4-ba9f-7cc1f369f608" alt="" srcset="">
+            <h2>Stellar Network</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-md="8" offset-md="2" size="12">
+            <ion-row>
+              <ion-col size="12">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>
+                      Login or Sign Up
+                    </ion-card-title>
+                    <ion-card-subtitle>
+                      Please select a sign in method below:
+                    </ion-card-subtitle>
+                  </ion-card-header>
+                  <ion-item button detail (click)="auth.googleSignin()">
+                    <ion-text>
+                      Continue with Google
+                    </ion-text>
+                    <ion-icon name="logo-google" slot="start"></ion-icon> 
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </ng-template>
+
+
+  <!-- User logged in -->
+  <ng-template #authenticated>
+    <div class="backdrop" *ngIf="auth.user$ | async as user">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size-md="8" offset-md="2" size="12">
+            <img class="ion-padding" src="https://firebasestorage.googleapis.com/v0/b/stellar-network-713a6.appspot.com/o/Screenshot%20from%202024-09-05%2020-04-53.png?alt=media&token=69cdf4bd-134b-43e4-ba9f-7cc1f369f608" alt="" srcset="">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-md="6" offset-md="3" size="12" class="ion-text-center">
+            <ion-note>
+              Welcome to the <strong>Stellar Network</strong>. You are logged in successfully. Have a look at your navigation options below:
+            </ion-note>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center" size-md="8" offset-md="2" size="12">
+            <ion-row>
+              <ion-col size="12">
+                <ion-card>
+                  <ion-card-header class="ion-text-left">
+                    <ion-card-title>
+                      Welcome to Stellar Network!
+                    </ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ion-item color="primary" lines="none" style="border-radius: 5px;">
+                      <ion-avatar slot="end">
+                        <img [src]="user.photoURL">
+                      </ion-avatar>
+                      <ion-text>{{ user.displayName }}</ion-text>
+                    </ion-item>
+                    <ion-button expand="block" fill="clear" color="dark" routerLink="/tabs/tab1">
+                      <ion-icon name="home-outline" slot="start"></ion-icon>
+                      <ion-text>Home</ion-text>
+                    </ion-button>
+                    <ion-button *ngIf="user.roles.visitor" expand="block" fill="clear" color="dark" routerLink="/tabs/tab2">
+                      <ion-icon name="easel-outline" slot="start"></ion-icon>
+                      <ion-text>Create a Node</ion-text>
+                    </ion-button>
+                  </ion-card-content>
+                </ion-card>
+                <ion-text color="dark" class="ion-margin">You are logged in as: {{ user.displayName }}</ion-text> <br>
+                <ion-button color="danger" expland="block" (click)="auth.signOut()">
+                  Sign Out
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ng-template>
+  
+</ion-content>
