@@ -1,0 +1,13 @@
+
+<ion-list *ngIf="!isLoading">
+  <ion-list-header>
+    <ion-text>Your Workload/Function Code:</ion-text>
+  </ion-list-header>
+  
+  <div class="NgxEditor__Wrapper">
+    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+    <ngx-editor [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+  </div>
+
+  <ion-button (click)="onSubmitWorkload()" color="secondary" style="--border-radius: 30px;" expand="block" *ngIf="!isLoading">Submit & Sign Node Data</ion-button> 
+</ion-list>

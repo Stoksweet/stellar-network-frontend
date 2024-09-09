@@ -13,5 +13,48 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Home page"></app-explore-container>
+  <ion-row>
+    <ion-col size-md="8" offset-md="2" size="12">
+      <ion-list>
+        <ion-list-header>
+          <ion-item lines="none">
+            <ion-text><strong>Share compute</strong> and <strong>earn DAG </strong>on the Stellar Network. Powered by Constellation and Stargazer Wallet.</ion-text>
+            <ion-icon slot="start" name="cloud-circle-outline"></ion-icon>
+          </ion-item>
+        </ion-list-header>
+      </ion-list>
+      <ion-button (click)="onAddNode()">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        <ion-text>Create a new node</ion-text>
+      </ion-button>
+
+      <ion-button (click)="onAddWorkload()">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        <ion-text>Run a workload</ion-text>
+      </ion-button>
+    </ion-col>
+    <ion-col size-md="8" offset-md="2" size="12">
+      <ion-card color="light">
+        <ion-card-header>
+          <ion-card-title>Usage Hours:</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <img src="https://images.squarespace-cdn.com/content/v1/55b6a6dce4b089e11621d3ed/1525828467405-F7G60I584RG42A8DOE8K/Dotted+Lines+6.png" alt="" srcset="">
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col *ngIf="!isLoading" size-md="8" offset-md="2" size="12">
+      <ion-list>
+        <ion-list-header>
+          <ion-text>Your Resources</ion-text>
+        </ion-list-header>
+        <ion-item *ngFor="let item of resources">
+          <ion-label>Resource</ion-label>
+          <ion-button>
+            <ion-icon slot="end" name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 </ion-content>

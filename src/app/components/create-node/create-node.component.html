@@ -1,0 +1,21 @@
+<ion-content>
+  <ion-list *ngIf="isLoading">
+    <ion-item>
+      <ion-label>Loading node info..</ion-label>
+      <ion-spinner color="primary"></ion-spinner>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="!isLoading">
+    <ion-list-header>
+      <ion-text>Your Node Info:</ion-text>
+    </ion-list-header>
+    <ion-item class="ion-text-capitalize" *ngFor="let item of getObjectEntries()">
+      <ion-text>{{item[0]}}</ion-text>
+      <ion-note slot="end">{{item[1]}}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-button (click)="onSubmitNode()" color="secondary" style="--border-radius: 30px;" expand="block" *ngIf="!isLoading">Submit & Sign Node Data</ion-button> 
+</ion-content>
+

@@ -16,7 +16,7 @@
 
       <ion-grid>
         <ion-row>
-          <ion-col size-md="8" offset-md="2" size="12" class="ion-text-center">
+          <ion-col size-md="8" offset-md="2" size="12" class="ion-text-center ion-items-center">
             <img class="ion-padding" src="https://firebasestorage.googleapis.com/v0/b/stellar-network-713a6.appspot.com/o/Screenshot%20from%202024-09-05%2020-04-53.png?alt=media&token=69cdf4bd-134b-43e4-ba9f-7cc1f369f608" alt="" srcset="">
             <h2>Stellar Network</h2>
           </ion-col>
@@ -57,7 +57,7 @@
 
       <ion-grid>
         <ion-row>
-          <ion-col size-md="8" offset-md="2" size="12">
+          <ion-col size-md="8" offset-md="2" size="12" class="ion-items-center ion-text-center">
             <img class="ion-padding" src="https://firebasestorage.googleapis.com/v0/b/stellar-network-713a6.appspot.com/o/Screenshot%20from%202024-09-05%2020-04-53.png?alt=media&token=69cdf4bd-134b-43e4-ba9f-7cc1f369f608" alt="" srcset="">
           </ion-col>
         </ion-row>
@@ -85,14 +85,28 @@
                       </ion-avatar>
                       <ion-text>{{ user.displayName }}</ion-text>
                     </ion-item>
+                    <ion-button *ngIf="user.roles.visitor && !user.accounts" expand="block" color="secondary" (click)="onConnectStargazer()">
+                      <ion-icon name="wallet-outline" slot="start"></ion-icon>
+                      <ion-text>Connect Stargazer Wallet</ion-text>
+                    </ion-button>
                     <ion-button expand="block" fill="clear" color="dark" routerLink="/tabs/tab1">
                       <ion-icon name="home-outline" slot="start"></ion-icon>
                       <ion-text>Home</ion-text>
                     </ion-button>
-                    <ion-button *ngIf="user.roles.visitor" expand="block" fill="clear" color="dark" routerLink="/tabs/tab2">
-                      <ion-icon name="easel-outline" slot="start"></ion-icon>
-                      <ion-text>Create a Node</ion-text>
-                    </ion-button>
+                    <ion-list-header>
+                      <ion-text>ETH Accounts</ion-text>
+                    </ion-list-header>
+                    <ion-item *ngFor="let ethAcc of user.accounts.ethAccounts">
+                      <ion-icon slot="start" name="wallet-outline"></ion-icon>
+                      <ion-text>{{ethAcc}}</ion-text>
+                    </ion-item>
+                    <ion-list-header>
+                      <ion-text>DAG Accounts</ion-text>
+                    </ion-list-header>
+                    <ion-item *ngFor="let dagAcc of user.accounts.dagAccounts">
+                      <ion-icon slot="start" name="wallet-outline"></ion-icon>
+                      <ion-text>{{dagAcc}}</ion-text>
+                    </ion-item>
                   </ion-card-content>
                 </ion-card>
                 <ion-text color="dark" class="ion-margin">You are logged in as: {{ user.displayName }}</ion-text> <br>

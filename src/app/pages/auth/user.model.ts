@@ -6,6 +6,12 @@ export interface User {
     returnedAt?: any;
     device?: object;
     roles?: Roles;
+    accounts?: Account;
+}
+
+export interface Account {
+    dagAccounts?: [];
+    ethAccounts?: [];
 }
 
 export interface Roles {
